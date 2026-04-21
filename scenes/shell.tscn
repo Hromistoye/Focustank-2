@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://8vje3rjnxmdy"]
+
+[ext_resource type="Texture2D" uid="uid://bff83dclu8s56" path="res://assets/shell.png" id="1_bo4bk"]
+[ext_resource type="Script" uid="uid://3asscn5eg42g" path="res://scripts/shell.gd" id="2_sb42f"]
+
+[node name="shell" type="Node2D" unique_id=371813479]
+script = ExtResource("2_sb42f")
+
+[node name="tex_shell" type="Sprite2D" parent="." unique_id=880940072]
+position = Vector2(104, 80)
+texture = ExtResource("1_bo4bk")

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cr8ya2qrv6jvy"]
+
+[ext_resource type="PackedScene" uid="uid://8vje3rjnxmdy" path="res://scenes/shell.tscn" id="1_avsvi"]
+[ext_resource type="PackedScene" uid="uid://ctt3l3w8rrar7" path="res://scenes/desktop_env.tscn" id="1_vplca"]
+
+[node name="tree" type="Node2D" unique_id=1335879558]
+scale = Vector2(2, 2)
+
+[node name="shell" parent="." unique_id=371813479 instance=ExtResource("1_avsvi")]
+
+[node name="desktop_env" parent="." unique_id=27101679 instance=ExtResource("1_vplca")]
