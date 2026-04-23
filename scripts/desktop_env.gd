@@ -72,9 +72,6 @@ func update_current_wallpaper_index():
 	else:
 		current_wallpaper_index=-1
 func check_current_wallpapers():
-	if not wallpaper_changable_paths.is_empty()&&wallpaper_changable_paths==last_wallpaper_changable_paths:
-		return
-	last_wallpaper_changable_paths=wallpaper_changable_paths.duplicate()
 	wallpaper_changable_paths.clear()
 	var dir
 	var file_name
@@ -90,3 +87,6 @@ func check_current_wallpapers():
 		file_name=dir.get_next()
 	wallpaper_changable_paths.sort()
 	dir.list_dir_end()
+	if not wallpaper_changable_paths.is_empty()&&wallpaper_changable_paths==last_wallpaper_changable_paths:
+		return
+	last_wallpaper_changable_paths=wallpaper_changable_paths.duplicate()
