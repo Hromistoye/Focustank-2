@@ -16,15 +16,23 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 func _input(event: InputEvent) -> void:
-	check_current_wallpapers()
-	update_current_wallpaper_index()
-	if not (event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right")):
-		return
 	if wallpaper_changable_paths.is_empty():
 		return
+	if event.is_action_pressed("ui_down"):
+		if current_wallpaper_path.is_empty():
+			return 
+		var copy_error=DirAccess.copy_absolute(current_wallpaper_path,MARKED_WALLPAPER_PATH)
+		if copy_error==OK:
+			print("成功！已将当前壁纸复制并重命名为：",MARKED_WALLPAPER_PATH)
+		else:
+			print("设置标记壁纸失败，错误码: ", copy_error)
 	if event.is_action_pressed("ui_left"):
+		check_current_wallpapers()
+		update_current_wallpaper_index()
 		current_wallpaper_index=(current_wallpaper_index-1)%wallpaper_changable_paths.size()
 	elif event.is_action_pressed("ui_right"):
+		check_current_wallpapers()
+		update_current_wallpaper_index()
 		current_wallpaper_index=(current_wallpaper_index+1)%wallpaper_changable_paths.size()
 	current_wallpaper_path=wallpaper_changable_paths[current_wallpaper_index]
 	var texture=load_wallpaper_tex_from_path(wallpaper_changable_paths[current_wallpaper_index])
