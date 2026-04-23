@@ -5,8 +5,6 @@ var ol_dirs=["user://.inside/l_hand","user://.inside/r_hand",
 "user://.inside/head/brain",
 "user://.outside/wallpapers",
 ]
-
-
 func _ready() -> void:
 	load_fake_bash_profile()
 	pass
