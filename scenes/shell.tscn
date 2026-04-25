@@ -5,6 +5,8 @@
 
 [node name="shell" type="Node2D" unique_id=371813479]
 script = ExtResource("2_sb42f")
+metadata/_edit_vertical_guides_ = [32.0, 176.0]
+metadata/_edit_horizontal_guides_ = [16.0, 112.0]
 
 [node name="tex_shell" type="Sprite2D" parent="." unique_id=880940072]
 position = Vector2(104, 80)

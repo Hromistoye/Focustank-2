@@ -1,5 +1,5 @@
-extends Node2D
-@onready var tex_wallpaper_node:Sprite2D=$tex_wallpaper
+extends Control
+@onready var tex_wallpaper_node:TextureRect=$tex_wallpaper
 const DEFAULT_WALLPAPER_PATH:String="res://assets/wallpaper.png"
 const WALLPAPER_DIR:String="user://.outside/wallpapers/"
 const WALLPAPER_NAME:String="marked_wallpaper.png"
@@ -22,10 +22,6 @@ func _input(event: InputEvent) -> void:
 		if current_wallpaper_path.is_empty():
 			return 
 		var copy_error=DirAccess.copy_absolute(current_wallpaper_path,MARKED_WALLPAPER_PATH)
-		if copy_error==OK:
-			print("成功！已将当前壁纸复制并重命名为：",MARKED_WALLPAPER_PATH)
-		else:
-			print("设置标记壁纸失败，错误码: ", copy_error)
 	if event.is_action_pressed("ui_left"):
 		check_current_wallpapers()
 		update_current_wallpaper_index()

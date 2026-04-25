@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ia8hdlnav7a2"]
+
+[ext_resource type="Script" uid="uid://blujloycgcars" path="res://scripts/desktop.gd" id="1_xxa2h"]
+[ext_resource type="PackedScene" uid="uid://4wv2e35ub34n" path="res://scenes/application.tscn" id="2_7gre8"]
+
+[node name="desktop" type="Control" unique_id=672488198]
+layout_mode = 3
+anchor_left = 0.07700001
+anchor_top = 0.05
+anchor_right = 0.423
+anchor_bottom = 0.35000002
+offset_left = -0.032001495
+offset_right = 0.03199768
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xxa2h")
+metadata/_edit_vertical_guides_ = [32.0, 176.0]
+metadata/_edit_horizontal_guides_ = [16.0, 112.0]
+
+[node name="tex_wallpaper" type="TextureRect" parent="." unique_id=1413185000]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="application" parent="." unique_id=1356528551 instance=ExtResource("2_7gre8")]
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = -7.6293945e-06

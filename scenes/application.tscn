@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://4wv2e35ub34n"]
+
+[ext_resource type="Script" uid="uid://cf7vqpmtsgyxn" path="res://scripts/application.gd" id="1_2a4x4"]
+[ext_resource type="Texture2D" uid="uid://dw00ydxsyqtm0" path="res://assets/icon1.png" id="1_r2gvc"]
+[ext_resource type="StyleBox" uid="uid://hfoksip8wd8q" path="res://resources/general_ui_box.tres" id="2_1frhs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2a4x4"]
+bg_color = Color(1, 0, 0, 1)
+expand_margin_top = 25.0
+
+[node name="application" type="Control" unique_id=1356528551]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -400.0
+offset_bottom = -304.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2a4x4")
+
+[node name="icon_app" type="TextureRect" parent="." unique_id=1924531098]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_r2gvc")
+
+[node name="popmenu_app" type="PopupMenu" parent="." unique_id=1884825820]
+oversampling_override = 1.0
+theme_override_styles/panel = ExtResource("2_1frhs")
+
+[node name="window_app" type="Window" parent="." unique_id=1506287311]
+transparent_bg = true
+gui_embed_subwindows = true
+oversampling_override = 1.0
+mode = 2
+position = Vector2i(64, 57)
+size = Vector2i(288, 167)
+visible = false
+transparent = true
+theme_override_styles/embedded_border = ExtResource("2_1frhs")
+theme_override_styles/embedded_unfocused_border = SubResource("StyleBoxFlat_2a4x4")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="gui_input" from="icon_app" to="." method="_on_icon_app_gui_input"]
+[connection signal="mouse_entered" from="popmenu_app" to="." method="_on_popmenu_app_mouse_entered"]
+[connection signal="close_requested" from="window_app" to="." method="_on_window_app_close_requested"]
