@@ -35,9 +35,9 @@ gui_embed_subwindows = true
 oversampling_override = 1.0
 mode = 2
 position = Vector2i(64, 57)
-size = Vector2i(288, 167)
 visible = false
 transparent = true
+max_size = Vector2i(288, 167)
 theme_override_styles/embedded_border = ExtResource("2_1frhs")
 theme_override_styles/embedded_unfocused_border = SubResource("StyleBoxFlat_2a4x4")
 
