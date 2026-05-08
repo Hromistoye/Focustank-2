@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://chrei214yarjt"]
+
+[ext_resource type="Texture2D" uid="uid://cokafogi2ed4t" path="res://assets/icon3.png" id="2_6c5em"]
+
+[sub_resource type="GDScript" id="GDScript_w14co"]
+script/source = "extends Control
+@onready var file_icon:Texture2D=null
+@onready var file_name:String=\"\"
+@onready var file_path:String=\"\"
+@onready var file_type:String=\"\"
+
+const TEX_FILE_ICON_PATH=\"res://assets/icon3.png\"
+const TEX_FOLDER_ICON_PATH=\"res://assets/icon4.png\"
+func _ready() -> void:
+	$TextureRect.texture=file_icon
+	$Label.text=file_name
+	pass 
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="file_system_app_file" type="Control" unique_id=1151017832]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_w14co")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1759171951]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -376.0
+offset_bottom = -280.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6c5em")
+
+[node name="Label" type="Label" parent="." unique_id=2007644311]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 42.0
+offset_right = 43.0
+offset_bottom = 65.0
+text = "test"

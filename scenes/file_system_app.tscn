@@ -1,6 +1,52 @@
 [gd_scene format=3 uid="uid://skh85mrhbwwc"]
 
-[ext_resource type="Script" uid="uid://cqh5podx05c64" path="res://scripts/file_system_app.gd" id="1_4usv8"]
+[ext_resource type="PackedScene" uid="uid://chrei214yarjt" path="res://scenes/file_system_app_file.tscn" id="2_mgwnm"]
+
+[sub_resource type="GDScript" id="GDScript_4usv8"]
+script/source = "extends Control
+const FILE_ITEM_SCENE=preload(\"res://scenes/file_system_app_file.tscn\")
+var current_files_will_draw:Array=[]
+
+func _ready() -> void:
+	var user_dir=DirAccess.open(\"user://\")
+	if not user_dir:
+		return
+	user_dir.include_hidden=true
+	user_dir.list_dir_begin()
+	var file_name=user_dir.get_next()
+	while file_name!=\"\":
+		current_files_will_draw.append(file_name)
+		file_name=user_dir.get_next()
+	user_dir.list_dir_end()
+	
+	draw_current_dir_content()
+	
+func draw_current_dir_content():
+	for file_name in current_files_will_draw:
+		#创建一个 file_system_app_file.tscn 的实例
+		# 为file_system_app_file.tscn的实例的 onready变量 赋值......
+		var item=FILE_ITEM_SCENE.instantiate()
+		item.file_name=file_name
+		item.file_path=\"user://\"+file_name
+		
+		if file_name.ends_with(\".txt\"):
+			item.file_type=\"file\"
+		else:
+			item.file_type=\"folder\"
+			
+		if item.file_type == \"folder\":
+			item.file_icon = load(\"res://assets/icon4.png\")
+		else:
+			item.file_icon = load(\"res://assets/icon3.png\")
+			
+		$Filelist.add_child(item)
+		pass
+	pass
+func _process(delta: float) -> void:
+	pass
+	
+	
+"
 
 [node name="file_system_app" type="Control" unique_id=1000912056]
 layout_mode = 3
@@ -9,4 +55,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4usv8")
+script = SubResource("GDScript_4usv8")
+
+[node name="file_system_app_file" parent="." unique_id=1151017832 instance=ExtResource("2_mgwnm")]
+layout_mode = 1
+
+[node name="Filelist" type="ScrollContainer" parent="." unique_id=1314736430]
+layout_mode = 0
+offset_right = 415.0
+offset_bottom = 315.0

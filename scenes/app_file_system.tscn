@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cchsatnkic57o"]
+
+[ext_resource type="Script" uid="uid://dgpvqstrmxqf" path="res://scripts/app_file_system.gd" id="1_hetmp"]
+
+[node name="APP_file_system" type="Control" unique_id=1209666042]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hetmp")
+metadata/_edit_vertical_guides_ = [416.0]
+
+[node name="container_files" type="GridContainer" parent="." unique_id=1610044050]
+layout_mode = 1
+offset_right = 416.0
+offset_bottom = 320.0
+columns = 3
