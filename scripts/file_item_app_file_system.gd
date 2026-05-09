@@ -14,11 +14,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 func setup(p_name: String, p_path: String, p_type: String, p_icon: Texture2D) -> void:
-	file_name = p_name
-	file_path = p_path
-	file_type = p_type
-	file_icon = p_icon
-
+	file_name=p_name
+	file_path=p_path
+	file_type=p_type
+	file_icon=p_icon
 	if is_node_ready():
 		apply_data()
 func apply_data() -> void:

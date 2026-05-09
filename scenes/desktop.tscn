@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://blujloycgcars" path="res://scripts/desktop.gd" id="1_xxa2h"]
 [ext_resource type="PackedScene" uid="uid://4wv2e35ub34n" path="res://scenes/application.tscn" id="2_7gre8"]
+[ext_resource type="PackedScene" uid="uid://2ih1uj3g1gpp" path="res://scenes/applicationFileSystem.tscn" id="3_81rff"]
 
 [node name="desktop" type="Control" unique_id=672488198]
 clip_children = 1
@@ -29,7 +30,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="application" parent="." unique_id=1356528551 instance=ExtResource("2_7gre8")]
+visible = false
 clip_contents = true
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = -7.6293945e-06
+
+[node name="applicationFileSystem" parent="." unique_id=499472848 instance=ExtResource("3_81rff")]
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = -1.0000076
