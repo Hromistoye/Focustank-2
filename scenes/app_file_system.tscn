@@ -12,8 +12,9 @@ grow_vertical = 2
 script = ExtResource("1_hetmp")
 metadata/_edit_vertical_guides_ = [416.0]
 
-[node name="container_files" type="GridContainer" parent="." unique_id=1610044050]
-layout_mode = 1
-offset_right = 416.0
-offset_bottom = 320.0
-columns = 3
+[node name="container_files" type="HFlowContainer" parent="." unique_id=670285521]
+custom_minimum_size = Vector2(288, 192)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+last_wrap_alignment = 1

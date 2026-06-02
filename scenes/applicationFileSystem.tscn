@@ -42,12 +42,6 @@ theme_override_styles/embedded_border = ExtResource("3_h71ip")
 theme_override_styles/embedded_unfocused_border = SubResource("StyleBoxFlat_2a4x4")
 
 [node name="APP_file_system" parent="window_app" unique_id=1209666042 instance=ExtResource("4_uikyf")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 100.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="gui_input" from="icon_app" to="." method="_on_icon_app_gui_input"]

@@ -2,7 +2,7 @@ extends Control
 const FILE_ITEM_SCENE=preload("res://scenes/file_item_app_file_system.tscn")
 var current_files_will_draw:Array=[]
 var current_path:String=""
-@onready var container_files_node:GridContainer=$container_files
+@onready var container_files_node:HFlowContainer=$container_files
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	init_current_ui_tree()
