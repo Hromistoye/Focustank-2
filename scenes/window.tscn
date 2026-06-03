@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dnbf64hqyb8s5"]
+
+[ext_resource type="Script" uid="uid://jv1kcar5cai2" path="res://scripts/window.gd" id="1_oya5r"]
+
+[node name="Window" type="Window" unique_id=196367089]
+transparent_bg = true
+oversampling_override = 1.0
+mode = 2
+position = Vector2i(0, 36)
+transparent = true
+script = ExtResource("1_oya5r")

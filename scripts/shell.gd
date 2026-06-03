@@ -1,9 +1,10 @@
 extends Node2D
 const ol_dirs=[
 "user://.inside/l_hand","user://.inside/r_hand",
-"user://.inside/body/stomach","user://.inside/body/heart",
+"user://.inside/body/stomach","user://.inside/body/rumen","user://.inside/body/heart",
 "user://.inside/head/brain",
 "user://.outside/wallpapers",
+"user://.outside/physic_status",
 ]
 
 func _ready() -> void:

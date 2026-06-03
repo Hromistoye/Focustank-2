@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dhpr73dlhyoi0"]
+
+[ext_resource type="Script" uid="uid://beftd46iqghhu" path="res://scripts/PeT.gd" id="1_y152e"]
+
+[node name="PeT" type="Node2D" unique_id=1990231576]
+script = ExtResource("1_y152e")
+
+[node name="tex_head" type="Sprite2D" parent="." unique_id=2124129553]
+
+[node name="tex_Leye" type="Sprite2D" parent="tex_head" unique_id=14165054]
+
+[node name="tex_Reye" type="Sprite2D" parent="tex_head" unique_id=1526803190]
+
+[node name="tex_mouth" type="Sprite2D" parent="tex_head" unique_id=1549395899]
+
+[node name="tex_body" type="Sprite2D" parent="." unique_id=1320765675]
+
+[node name="tex_Lhand" type="Sprite2D" parent="tex_body" unique_id=1560524319]
+
+[node name="tex_Rhand" type="Sprite2D" parent="tex_body" unique_id=926007936]
+
+[node name="timer_status" type="Timer" parent="." unique_id=390688873]
+
+[connection signal="timeout" from="timer_status" to="." method="_on_timer_status_timeout"]
