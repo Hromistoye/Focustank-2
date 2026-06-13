@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://qc6jrctvlyrf"]
+
+[ext_resource type="Script" uid="uid://cf7vqpmtsgyxn" path="res://scripts/application.gd" id="1_aknpq"]
+[ext_resource type="Texture2D" uid="uid://dw00ydxsyqtm0" path="res://assets/icon1.png" id="2_d2psw"]
+[ext_resource type="PackedScene" uid="uid://dnbf64hqyb8s5" path="res://scenes/window.tscn" id="3_ealh5"]
+[ext_resource type="Script" uid="uid://dnp2ktewcf1fh" path="res://scripts/container_files.gd" id="4_d2psw"]
+[ext_resource type="PackedScene" uid="uid://cjxm7c0ka7147" path="res://scenes/file_item_FileSystemApp.tscn" id="5_ealh5"]
+
+[node name="application" type="Control" unique_id=1356528551]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_aknpq")
+metadata/_edit_vertical_guides_ = [-363.0]
+
+[node name="icon_app" type="TextureRect" parent="." unique_id=1924531098]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("2_d2psw")
+
+[node name="popmenu_app" type="PopupMenu" parent="." unique_id=1884825820]
+oversampling_override = 1.0
+visible = true
+
+[node name="window_app" parent="." unique_id=196367089 instance=ExtResource("3_ealh5")]
+
+[node name="container_files" type="HFlowContainer" parent="window_app" unique_id=920030097]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_d2psw")
+
+[node name="file_item_FileSystemApp" parent="window_app/container_files" unique_id=855529429 instance=ExtResource("5_ealh5")]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="gui_input" from="icon_app" to="." method="_on_icon_app_gui_input"]
+[connection signal="index_pressed" from="popmenu_app" to="." method="_on_popmenu_app_index_pressed"]
+[connection signal="mouse_entered" from="popmenu_app" to="." method="_on_popmenu_app_mouse_entered"]
+[connection signal="close_requested" from="window_app" to="." method="_on_window_app_close_requested"]
+[connection signal="gui_input" from="window_app/container_files" to="window_app/container_files" method="_on_gui_input"]
+[connection signal="gui_input" from="window_app/container_files/file_item_FileSystemApp" to="window_app/container_files" method="_on_file_item_file_system_app_gui_input"]

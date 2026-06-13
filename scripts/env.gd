@@ -13,7 +13,8 @@ var physic_status={
 	"vocalization":"嗯......",
 	"time_stamp":null,
 	}
-	
+
+signal open_a_folder()
 func _ready() -> void:
 	pass 
 func _process(delta: float) -> void:

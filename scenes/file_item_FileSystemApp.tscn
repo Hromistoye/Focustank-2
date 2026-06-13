@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://cjxm7c0ka7147"]
 
-[ext_resource type="Script" uid="uid://8rxw7e5samim" path="res://scripts/file_item_app_file_system.gd" id="1_td1q2"]
-[ext_resource type="Texture2D" uid="uid://cokafogi2ed4t" path="res://assets/icon3.png" id="2_ehr2c"]
+[ext_resource type="Script" uid="uid://8rxw7e5samim" path="res://scripts/file_item_FileSystemApp.gd" id="1_e7aar"]
+[ext_resource type="Texture2D" uid="uid://cokafogi2ed4t" path="res://assets/icon3.png" id="2_gej5s"]
 
-[node name="file_item_APP_file_system" type="Control" unique_id=855529429]
+[node name="file_item_FileSystemApp" type="Control" unique_id=855529429]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 32.0
 offset_bottom = 32.0
-script = ExtResource("1_td1q2")
+script = ExtResource("1_e7aar")
 
 [node name="icon_file_item" type="TextureRect" parent="." unique_id=1166109849]
 custom_minimum_size = Vector2(16, 16)
@@ -21,7 +21,7 @@ offset_left = -8.0
 offset_right = 8.0
 offset_bottom = 16.0
 grow_horizontal = 2
-texture = ExtResource("2_ehr2c")
+texture = ExtResource("2_gej5s")
 
 [node name="name_file_item" type="Label" parent="." unique_id=1851589944]
 layout_mode = 1
@@ -37,3 +37,5 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "123"
+
+[node name="popmenu_file_item" type="PopupMenu" parent="." unique_id=544410516]
