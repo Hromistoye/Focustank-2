@@ -30,7 +30,6 @@ func clamp_decorated_window() -> void:
 	var max_pos:=limit_rect.end-deco_size
 	max_pos.x=max(max_pos.x,min_pos.x)
 	max_pos.y=max(max_pos.y,min_pos.y)
-
 	var clamped_deco_pos:=Vector2i(
 		clamp(deco_pos.x,min_pos.x,max_pos.x),
 		clamp(deco_pos.y,min_pos.y,max_pos.y)

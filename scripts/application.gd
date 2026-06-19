@@ -12,16 +12,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:#处理图标拖拽；限制图标与窗口在屏幕范围内
 	if dragging:
 		global_position=get_global_mouse_position()-drag_offset
-		#global_position.x=clamp(global_position.x,Env.SCREEN_LEFT,Env.SCREEN_RIGHT-Env.ICON_SIZE)
-		#global_position.y=clamp(global_position.y,Env.SCREEN_TOP,Env.SCREEN_BOTTOM-Env.ICON_SIZE)
 	pass
 func popmenu_item_init():
 	popmenu_app_node.add_item("eat")
 func module_init():#初始化图标尺寸，限制范围等信息
 	icon_app_node.custom_minimum_size.x=Env.ICON_SIZE
 	icon_app_node.custom_minimum_size.y=Env.ICON_SIZE
-	#global_position.x=clamp(global_position.x,Env.SCREEN_LEFT,Env.SCREEN_RIGHT-Env.ICON_SIZE)
-	#global_position.y=clamp(global_position.y,Env.SCREEN_TOP,Env.SCREEN_BOTTOM-Env.ICON_SIZE)
 	popmenu_item_init()
 func _on_icon_app_gui_input(event: InputEvent) -> void:#应用图标响应事件
 	#如果事件属于鼠标事件；

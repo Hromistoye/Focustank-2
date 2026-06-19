@@ -9,6 +9,7 @@
 [node name="application" type="Control" unique_id=1356528551]
 layout_mode = 3
 anchors_preset = 0
+scale = Vector2(2, 2)
 script = ExtResource("1_aknpq")
 metadata/_edit_vertical_guides_ = [-363.0]
 
@@ -41,4 +42,6 @@ layout_mode = 2
 [connection signal="mouse_entered" from="popmenu_app" to="." method="_on_popmenu_app_mouse_entered"]
 [connection signal="close_requested" from="window_app" to="." method="_on_window_app_close_requested"]
 [connection signal="gui_input" from="window_app/container_files" to="window_app/container_files" method="_on_gui_input"]
+[connection signal="emit_file_item_act_index" from="window_app/container_files/file_item_FileSystemApp" to="window_app/container_files" method="_on_file_item_file_system_app_emit_file_item_act_index"]
+[connection signal="emit_file_item_new_name" from="window_app/container_files/file_item_FileSystemApp" to="window_app/container_files" method="_on_file_item_file_system_app_emit_file_item_new_name"]
 [connection signal="gui_input" from="window_app/container_files/file_item_FileSystemApp" to="window_app/container_files" method="_on_file_item_file_system_app_gui_input"]

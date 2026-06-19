@@ -1,8 +1,8 @@
 extends Node
-const SCREEN_TOP=16
-const SCREEN_BOTTOM=112
-const SCREEN_LEFT=32
-const SCREEN_RIGHT=176
+const SCREEN_TOP=16 *2 
+const SCREEN_BOTTOM=112 *2
+const SCREEN_LEFT=32 *2
+const SCREEN_RIGHT=176 *2
 
 const ICON_SIZE=16
 
