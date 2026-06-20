@@ -25,15 +25,21 @@ visible = true
 
 [node name="window_app" parent="." unique_id=196367089 instance=ExtResource("3_ealh5")]
 
-[node name="container_files" type="HFlowContainer" parent="window_app" unique_id=920030097]
+[node name="scrollbar_files" type="ScrollContainer" parent="window_app" unique_id=1188077692]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 4
+
+[node name="container_files" type="HFlowContainer" parent="window_app/scrollbar_files" unique_id=920030097]
+layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("4_d2psw")
 
-[node name="file_item_FileSystemApp" parent="window_app/container_files" unique_id=855529429 instance=ExtResource("5_ealh5")]
+[node name="file_item_FileSystemApp" parent="window_app/scrollbar_files/container_files" unique_id=855529429 instance=ExtResource("5_ealh5")]
 layout_mode = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
@@ -41,7 +47,7 @@ layout_mode = 2
 [connection signal="index_pressed" from="popmenu_app" to="." method="_on_popmenu_app_index_pressed"]
 [connection signal="mouse_entered" from="popmenu_app" to="." method="_on_popmenu_app_mouse_entered"]
 [connection signal="close_requested" from="window_app" to="." method="_on_window_app_close_requested"]
-[connection signal="gui_input" from="window_app/container_files" to="window_app/container_files" method="_on_gui_input"]
-[connection signal="emit_file_item_act_index" from="window_app/container_files/file_item_FileSystemApp" to="window_app/container_files" method="_on_file_item_file_system_app_emit_file_item_act_index"]
-[connection signal="emit_file_item_new_name" from="window_app/container_files/file_item_FileSystemApp" to="window_app/container_files" method="_on_file_item_file_system_app_emit_file_item_new_name"]
-[connection signal="gui_input" from="window_app/container_files/file_item_FileSystemApp" to="window_app/container_files" method="_on_file_item_file_system_app_gui_input"]
+[connection signal="gui_input" from="window_app/scrollbar_files/container_files" to="window_app/scrollbar_files/container_files" method="_on_gui_input"]
+[connection signal="emit_file_item_act_index" from="window_app/scrollbar_files/container_files/file_item_FileSystemApp" to="window_app/scrollbar_files/container_files" method="_on_file_item_file_system_app_emit_file_item_act_index"]
+[connection signal="emit_file_item_new_name" from="window_app/scrollbar_files/container_files/file_item_FileSystemApp" to="window_app/scrollbar_files/container_files" method="_on_file_item_file_system_app_emit_file_item_new_name"]
+[connection signal="gui_input" from="window_app/scrollbar_files/container_files/file_item_FileSystemApp" to="window_app/scrollbar_files/container_files" method="_on_file_item_file_system_app_gui_input"]

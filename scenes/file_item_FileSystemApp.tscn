@@ -66,5 +66,8 @@ scroll_fit_content_width = true
 [node name="popmenu_file_item" type="PopupMenu" parent="." unique_id=544410516]
 oversampling_override = 1.0
 
+[connection signal="gui_input" from="icon_file_item" to="." method="_on_icon_file_item_gui_input"]
+[connection signal="mouse_entered" from="icon_file_item" to="." method="_on_icon_file_item_mouse_entered"]
+[connection signal="focus_entered" from="name_input_file_item" to="." method="_on_name_input_file_item_focus_entered"]
 [connection signal="gui_input" from="name_input_file_item" to="." method="_on_name_file_item_gui_input"]
 [connection signal="index_pressed" from="popmenu_file_item" to="." method="_on_popmenu_file_item_index_pressed"]

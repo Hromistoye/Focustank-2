@@ -32,8 +32,8 @@ func _on_icon_app_gui_input(event: InputEvent) -> void:#应用图标响应事件
 			return
 		if event.button_index==MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				drag_offset=get_global_mouse_position()-global_position
 				dragging=true
+				drag_offset=get_global_mouse_position()-global_position
 				get_viewport().set_input_as_handled()
 			else:
 				dragging=false
