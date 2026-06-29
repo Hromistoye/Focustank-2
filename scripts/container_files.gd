@@ -80,9 +80,10 @@ func _on_file_item_file_system_app_gui_input(event: InputEvent,the_item) -> void
 				file_item_node.popmenu_file_item.popup()
 				file_item_node.popmenu_file_item.position=file_item_pos
 				pass 
-func _on_gui_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index==MOUSE_BUTTON_RIGHT and event.pressed:
+			print("righ;click")
 			var parent_path=current_path.get_base_dir()
 			var parent_dir=DirAccess.open(parent_path)
 			if not parent_path:
@@ -142,6 +143,7 @@ func draw_current_ui_tree():
 		add_child(file_item)
 		file_item.find_child("icon_file_item").gui_input.connect(_on_file_item_file_system_app_gui_input.bind(file_item))
 		file_item.emit_file_item_new_name.connect(_on_file_item_file_system_app_emit_file_item_new_name)
+		file_item.emit_file_item_moved_path.connect(_on_file_item_file_system_app_emit_file_item_moved_path)
 		call_deferred("resize_file_item")
 func resize_file_item():
 	var items:Array=[]
@@ -171,15 +173,17 @@ func _on_file_item_file_system_app_emit_file_item_new_name(new_name: String) -> 
 	var src_path=current_path.path_join(current_act_file_item_name)
 	var dst_path=current_path.path_join(new_name)
 	DirAccess.rename_absolute(src_path,dst_path)
-func copy_directory(src_path:String,dst_path:String):
+func copy_directory(src_path:String, dst_path:String):
 	var src_dir=DirAccess.open(src_path)
 	if not src_dir:
 		return
+	var dst_dir=DirAccess.make_dir_recursive_absolute(dst_path)
 	src_dir.list_dir_begin()
 	var file_name=src_dir.get_next()
 	while file_name!="":
-		if file_name=="." or file_name=="..":
+		if file_name=="." or file_name == "..":
 			file_name=src_dir.get_next()
+			continue
 		var src_file_path=src_path.path_join(file_name)
 		var dst_file_path=dst_path.path_join(file_name)
 		if src_dir.current_is_dir():
@@ -188,7 +192,6 @@ func copy_directory(src_path:String,dst_path:String):
 			src_dir.copy(src_file_path,dst_file_path)
 		file_name=src_dir.get_next()
 	src_dir.list_dir_end()
-	pass
 func remove_directory(path: String):
 	var dir=DirAccess.open(path)
 	if not dir:
@@ -207,3 +210,12 @@ func remove_directory(path: String):
 		file_name=dir.get_next()
 	dir.list_dir_end()
 	DirAccess.remove_absolute(path)
+func _on_file_item_file_system_app_emit_file_item_moved_path(unmoved_path: Variant, moved_path: Variant) -> void:
+	print("handle!")
+	var dir=DirAccess.open("user://") 
+	if not dir:
+		return
+	dir.rename_absolute(unmoved_path,moved_path)
+	scan_current_ui_tree()
+	draw_current_ui_tree()
+	pass # Replace with function body.
