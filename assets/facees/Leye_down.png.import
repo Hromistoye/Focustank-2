@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1hrvnxi5rpd6"
-path="res://.godot/imported/Reye_confused.png-f0c125731a87d3348a5b275add66b36f.ctex"
+uid="uid://camf136tc587s"
+path="res://.godot/imported/Leye_down.png-f1f087cff7e02acb9f463da9359d512b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Reye_confused.png"
-dest_files=["res://.godot/imported/Reye_confused.png-f0c125731a87d3348a5b275add66b36f.ctex"]
+source_file="res://assets/facees/Leye_down.png"
+dest_files=["res://.godot/imported/Leye_down.png-f1f087cff7e02acb9f463da9359d512b.ctex"]
 
 [params]
 

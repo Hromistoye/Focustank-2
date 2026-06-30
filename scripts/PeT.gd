@@ -7,30 +7,21 @@ const FEELING_SORT=[
 "happy",
 "confused"]
 @onready var timer_status_node=$timer_status
+signal goodbye()
 func _ready() -> void:
+	get_tree().set_auto_accept_quit(false)
 	physic_status_load()
 	timer_status_node_init()
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	pass
 func _process(delta: float) -> void:
 	pass
-
-func timer_status_node_init():
-	timer_status_node.wait_time=1.0
-	timer_status_node.start()
-	
-func physic_status_init():#初始化结构
-	var status_str=JSON.stringify(Env.physic_status,"\t")
-	var status_file=FileAccess.open(PHYSIC_STATUS_PATH,FileAccess.WRITE)
-	status_file.store_string(status_str)
-	status_file.close()
-func physic_status_load():#读取可用状态
-	#如果没有可用记录,初始化记录
-	#依次读取数据
+func _notification(what: int) -> void:
+	if what==NOTIFICATION_WM_CLOSE_REQUEST:
+		physic_status_save()
+		goodbye.emit()
+func physic_status_load():
 	if not FileAccess.file_exists(PHYSIC_STATUS_PATH):
-		physic_status_init()
+		physic_status_file_init()
 	else:
 		var status_file=FileAccess.open(PHYSIC_STATUS_PATH,FileAccess.READ)
 		var status_str=status_file.get_as_text()
@@ -48,13 +39,21 @@ func physic_status_load():#读取可用状态
 			if status_json.has("time_stamp"):
 				Env.physic_status["time_stamp"]=status_json["time_stamp"]
 		pass
-
-
+func physic_status_save():
+	var status_str=JSON.stringify(Env.physic_status,"\t")
+	var status_file=FileAccess.open(PHYSIC_STATUS_PATH,FileAccess.WRITE)
+	status_file.store_string(status_str)
+	status_file.close()
+func physic_status_file_init():#初始化结构
+	var status_str=JSON.stringify(Env.physic_status,"\t")
+	var status_file=FileAccess.open(PHYSIC_STATUS_PATH,FileAccess.WRITE)
+	status_file.store_string(status_str)
+	status_file.close()	
+func timer_status_node_init():
+	timer_status_node.wait_time=1.0
+	timer_status_node.start()
 func _on_timer_status_timeout() -> void:#饥饿值的流逝
 	Env.physic_status["hunger"]-=0.01
-	print("-0.01!")
-	print(Env.physic_status["hunger"])
 	pass 
-
 func mana():
 	pass

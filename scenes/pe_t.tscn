@@ -1,23 +1,35 @@
 [gd_scene format=3 uid="uid://dhpr73dlhyoi0"]
 
 [ext_resource type="Script" uid="uid://beftd46iqghhu" path="res://scripts/PeT.gd" id="1_y152e"]
+[ext_resource type="Texture2D" uid="uid://c4ar1ttb5km63" path="res://assets/head.png" id="2_d7ke2"]
+[ext_resource type="Texture2D" uid="uid://dx30sciosx2lc" path="res://assets/facees/Leye_calm.png" id="3_d7ke2"]
+[ext_resource type="Texture2D" uid="uid://bht3jhwwfse8i" path="res://assets/facees/Reye_calm.png" id="4_40cnq"]
+[ext_resource type="Texture2D" uid="uid://4dev202e6puc" path="res://assets/body.png" id="5_05wqr"]
+[ext_resource type="Texture2D" uid="uid://duo7oq8kf2nhm" path="res://assets/Lhand.png" id="6_o7de1"]
+[ext_resource type="Texture2D" uid="uid://blh4qdpv7bsw6" path="res://assets/Rhand.png" id="7_343my"]
 
 [node name="PeT" type="Node2D" unique_id=1990231576]
 script = ExtResource("1_y152e")
 
 [node name="tex_head" type="Sprite2D" parent="." unique_id=2124129553]
+texture = ExtResource("2_d7ke2")
 
 [node name="tex_Leye" type="Sprite2D" parent="tex_head" unique_id=14165054]
+texture = ExtResource("3_d7ke2")
 
 [node name="tex_Reye" type="Sprite2D" parent="tex_head" unique_id=1526803190]
+texture = ExtResource("4_40cnq")
 
 [node name="tex_mouth" type="Sprite2D" parent="tex_head" unique_id=1549395899]
 
 [node name="tex_body" type="Sprite2D" parent="." unique_id=1320765675]
+texture = ExtResource("5_05wqr")
 
 [node name="tex_Lhand" type="Sprite2D" parent="tex_body" unique_id=1560524319]
+texture = ExtResource("6_o7de1")
 
 [node name="tex_Rhand" type="Sprite2D" parent="tex_body" unique_id=926007936]
+texture = ExtResource("7_343my")
 
 [node name="timer_status" type="Timer" parent="." unique_id=390688873]
 

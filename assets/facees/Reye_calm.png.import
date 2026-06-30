@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bht3jhwwfse8i"
-path="res://.godot/imported/Reye_calm.png-a082dcc0fc324aee73603689abe11bb5.ctex"
+path="res://.godot/imported/Reye_calm.png-f7ded21b3536655d7a12680be17108c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Reye_calm.png"
-dest_files=["res://.godot/imported/Reye_calm.png-a082dcc0fc324aee73603689abe11bb5.ctex"]
+source_file="res://assets/facees/Reye_calm.png"
+dest_files=["res://.godot/imported/Reye_calm.png-f7ded21b3536655d7a12680be17108c9.ctex"]
 
 [params]
 
