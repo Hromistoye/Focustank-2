@@ -51,4 +51,3 @@ layout_mode = 2
 [connection signal="emit_file_item_act_index" from="window_app/scrollbar_files/container_files/file_item_FileSystemApp" to="window_app/scrollbar_files/container_files" method="_on_file_item_file_system_app_emit_file_item_act_index"]
 [connection signal="emit_file_item_moved_path" from="window_app/scrollbar_files/container_files/file_item_FileSystemApp" to="window_app/scrollbar_files/container_files" method="_on_file_item_file_system_app_emit_file_item_moved_path"]
 [connection signal="emit_file_item_new_name" from="window_app/scrollbar_files/container_files/file_item_FileSystemApp" to="window_app/scrollbar_files/container_files" method="_on_file_item_file_system_app_emit_file_item_new_name"]
-[connection signal="gui_input" from="window_app/scrollbar_files/container_files/file_item_FileSystemApp" to="window_app/scrollbar_files/container_files" method="_on_file_item_file_system_app_gui_input"]

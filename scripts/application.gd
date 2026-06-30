@@ -2,10 +2,8 @@ extends Control
 @onready var icon_app_node=$icon_app
 @onready var popmenu_app_node=$popmenu_app
 @onready var window_app_node=$window_app
-
 var dragging:bool=false
 var drag_offset:Vector2=Vector2.ZERO
-
 func _ready() -> void:
 	module_init()
 	pass 

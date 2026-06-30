@@ -75,7 +75,6 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 	else:
 		return false
 func _drop_data(at_position: Vector2, data: Variant) -> void:
-	print("here!")
 	var undropped_path=data["path"]
 	var dropped_path=file_path.path_join(data["name"])
 	emit_file_item_moved_path.emit(undropped_path,dropped_path)

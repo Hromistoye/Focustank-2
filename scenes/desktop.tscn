@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ia8hdlnav7a2"]
 
 [ext_resource type="Script" uid="uid://blujloycgcars" path="res://scripts/desktop.gd" id="1_xxa2h"]
+[ext_resource type="PackedScene" uid="uid://qc6jrctvlyrf" path="res://scenes/application_FileSystem.tscn" id="2_7gre8"]
 
 [node name="desktop" type="Control" unique_id=672488198]
 clip_children = 1
@@ -19,3 +20,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="application" parent="." unique_id=1356528551 instance=ExtResource("2_7gre8")]
+layout_mode = 0

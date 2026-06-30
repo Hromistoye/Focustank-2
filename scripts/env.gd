@@ -8,6 +8,7 @@ const ICON_SIZE=16
 
 var physic_status={
 	"hunger":100,
+	"storage_servings":0,
 	"mana":0,
 	"feeling":"calm",
 	"vocalization":"嗯......",

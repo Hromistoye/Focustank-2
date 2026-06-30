@@ -12,8 +12,10 @@ var current_file_item_new_name:String=""
 var isstaying:bool=true
 var popup_press_position:=Vector2.ZERO
 var popup_waiting_for_release:bool=false
+signal cook(file_ext,isdir,file_size)
 func _ready() -> void:
 	init_current_ui_tree()
+	static_signal_connect()
 	pass
 func _process(delta: float) -> void:
 	if isstaying:
@@ -31,6 +33,10 @@ func init_current_ui_tree():
 	open_init_path()
 	scan_current_ui_tree()
 	draw_current_ui_tree()
+func static_signal_connect():
+	var PeT_scene=get_node("../../../../../PeT")
+	cook.connect(PeT_scene._on_container_files_cook)
+	pass
 func _on_file_item_file_system_app_emit_file_item_act_index(file_item_act_index: Variant) -> void:
 	if file_item_act_index==0:#rename
 		current_file_item.name_file_item_node.hide()
@@ -52,11 +58,37 @@ func _on_file_item_file_system_app_emit_file_item_act_index(file_item_act_index:
 	elif file_item_act_index==2:#eat
 		var will_eat_path=current_path.path_join(current_act_file_item_name)
 		var isdir=DirAccess.dir_exists_absolute(will_eat_path)
+		var file_size:int=0
+		var file_ext:String=""
 		if isdir:
+			file_size=sizeof_the_dir(will_eat_path)
 			remove_directory(will_eat_path)
 		else:
+			file_size=sizeof_the_file(will_eat_path)
 			DirAccess.remove_absolute(will_eat_path)
+		file_ext=will_eat_path.get_extension()
+		cook.emit(file_ext,isdir,file_size)
 		current_act_file_item_name=""
+func sizeof_the_file(file_path:String):
+	var file_size_bytes=FileAccess.get_size(file_path)
+	return file_size_bytes
+func sizeof_the_dir(dir_path:String):
+	var dir_size_bytes=0
+	var dir=DirAccess.open(dir_path)
+	if not dir:
+		return 0
+	dir.list_dir_begin()
+	var file_name=dir.get_next()
+	while file_name!="":
+		if file_name!="." and file_name!="..":
+			var full_path=dir_path.path_join(file_name)
+			if dir.current_is_dir():
+				dir_size_bytes+=sizeof_the_dir(full_path)
+			else:
+				dir_size_bytes+=FileAccess.get_size(full_path)
+		file_name=dir.get_next()
+	dir.list_dir_end()
+	return dir_size_bytes
 func _on_file_item_file_system_app_gui_input(event: InputEvent,the_item) -> void:
 	if event is InputEventMouseButton:
 		current_file_item=the_item
@@ -83,7 +115,6 @@ func _on_file_item_file_system_app_gui_input(event: InputEvent,the_item) -> void
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index==MOUSE_BUTTON_RIGHT and event.pressed:
-			print("righ;click")
 			var parent_path=current_path.get_base_dir()
 			var parent_dir=DirAccess.open(parent_path)
 			if not parent_path:
@@ -211,7 +242,6 @@ func remove_directory(path: String):
 	dir.list_dir_end()
 	DirAccess.remove_absolute(path)
 func _on_file_item_file_system_app_emit_file_item_moved_path(unmoved_path: Variant, moved_path: Variant) -> void:
-	print("handle!")
 	var dir=DirAccess.open("user://") 
 	if not dir:
 		return
