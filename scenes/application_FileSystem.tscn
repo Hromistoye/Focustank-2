@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dnp2ktewcf1fh" path="res://scripts/container_files.gd" id="4_d2psw"]
 [ext_resource type="PackedScene" uid="uid://cjxm7c0ka7147" path="res://scenes/file_item_FileSystemApp.tscn" id="5_ealh5"]
 
-[node name="application" type="Control" unique_id=1356528551]
+[node name="application_FileSystem" type="Control" unique_id=1356528551]
 layout_mode = 3
 anchors_preset = 0
 scale = Vector2(2, 2)

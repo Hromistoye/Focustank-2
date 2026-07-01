@@ -3,6 +3,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	get_tree().set_auto_accept_quit(false)
 	pass # Replace with function body.
 
 
@@ -14,3 +15,7 @@ func _process(delta: float) -> void:
 func _on_pe_t_goodbye() -> void:
 	get_tree().quit()
 	pass 
+
+
+func _on_pe_t_hunger() -> void:
+	pass # Replace with function body.

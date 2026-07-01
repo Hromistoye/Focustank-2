@@ -1,11 +1,13 @@
 extends Node2D
 const PHYSIC_STATUS_PATH="user://.outside/physic_status/PeT_status.json"
-const FEELING_SORT=[
-"calm",
-"annoyed",
-"down",
-"happy",
-"confused"]
+const VERY_HUNGER=30
+const VOLUME_STOMACH=100*50
+const SEC_PER_SERVING=600
+const HUNGER_PER_SEC=0.005
+const KIB:int=1024
+const MIB:int=1024*KIB
+const POINTS_PER_REFERENCE_FILE:int=100
+const MAX_POINTS_PER_FILE:int=600
 const EXTENSION_CATEGORY:Dictionary={
 	#纯ASCII文件
 	"txt": "text",
@@ -161,11 +163,6 @@ const EXTENSION_CATEGORY:Dictionary={
 	"key": "document",
 	"wps": "document",
 }
-const KIB:int=1024
-const MIB:int=1024*KIB
-const POINTS_PER_REFERENCE_FILE:int=100
-const MAX_POINTS_PER_FILE:int=600
-const TYPE_THRESHOLD:int=50*100
 const DISH_REFERENCE_SIZE:Dictionary={
 	"text": 8*KIB,
 	"image": 8*MIB,
@@ -182,80 +179,103 @@ const DISH_REFERENCE_SIZE:Dictionary={
 	"dir": 0,
 	"NOT_FOOD": 0,
 }
+const FEELING_SORT=[
+"calm",
+"annoyed",
+"down",
+"happy",
+"confused"]
 @onready var timer_status_node=$timer_status
-
+var current_time_stamp=null
+signal hunger()
+signal type()
 signal goodbye()
+func static_signal_connect():
+	var application_FileSystem_scene=get_node("../../application_FileSystem")
+	hunger.connect(application_FileSystem_scene._on_pe_t_hunger)
+	pass
 func _ready() -> void:
-	get_tree().set_auto_accept_quit(false)
-	physic_status_load()
-	timer_status_node_init()
+	_bootloader()
+	static_signal_connect()
 	pass
 func _process(delta: float) -> void:
 	pass
-
 func _notification(what: int) -> void:
 	if what==NOTIFICATION_WM_CLOSE_REQUEST:
 		physic_status_save()
 		goodbye.emit()
-func physic_status_load():
+
+func _bootloader():
 	if not FileAccess.file_exists(PHYSIC_STATUS_PATH):
 		physic_status_file_init()
 	else:
-		var status_file=FileAccess.open(PHYSIC_STATUS_PATH,FileAccess.READ)
-		var status_str=status_file.get_as_text()
-		status_file.close()
-		var status_json=JSON.parse_string(status_str)
-		if status_json!=null:
-			if status_json.has("hunger"):
-				Env.physic_status["hunger"]=status_json["hunger"]
-			if status_json.has("storage_serving"):
-				Env.physic_status["storage_serving"]=status_json["storage_serving"]
-			if status_json.has("mana"):
-				Env.physic_status["mana"]=status_json["mana"]
-			if status_json.has("feeling"):
-				Env.physic_status["feeling"]=status_json["feeling"]
-			if status_json.has("vocalization"):
-				Env.physic_status["vocalization"]=status_json["vocalization"]
-			if status_json.has("time_stamp"):
-				Env.physic_status["time_stamp"]=status_json["time_stamp"]
+		physic_status_load()
+	timer_status_node_init()
+	what_happened()
+func physic_status_load():
+	var status_file=FileAccess.open(PHYSIC_STATUS_PATH,FileAccess.READ)
+	var status_str=status_file.get_as_text()
+	status_file.close()
+	var status_json=JSON.parse_string(status_str)
+	if status_json!=null:
+		if status_json.has("hunger"):
+			Env.physic_status["hunger"]=status_json["hunger"]
+		if status_json.has("storage_serving"):
+			Env.physic_status["storage_serving"]=status_json["storage_serving"]
+		if status_json.has("mana"):
+			Env.physic_status["mana"]=status_json["mana"]
+		if status_json.has("feeling"):
+			Env.physic_status["feeling"]=status_json["feeling"]
+		if status_json.has("vocalization"):
+			Env.physic_status["vocalization"]=status_json["vocalization"]
+		if status_json.has("time_stamp"):
+			Env.physic_status["time_stamp"]=Time.get_unix_time_from_system()
 		pass
-func physic_status_save():
+func physic_status_file_init():
 	var status_str=JSON.stringify(Env.physic_status,"\t")
 	var status_file=FileAccess.open(PHYSIC_STATUS_PATH,FileAccess.WRITE)
 	status_file.store_string(status_str)
 	status_file.close()
-func physic_status_file_init():#初始化结构
-	var status_str=JSON.stringify(Env.physic_status,"\t")
-	var status_file=FileAccess.open(PHYSIC_STATUS_PATH,FileAccess.WRITE)
-	status_file.store_string(status_str)
-	status_file.close()
+func what_happened():
+	current_time_stamp=Time.get_unix_time_from_system()
+	if current_time_stamp>=Env.physic_status["time_stamp"]:
+		var passed_seconds=current_time_stamp-Env.physic_status["time_stamp"]
+		var serving_to_mana=int(min(passed_seconds,Env.physic_status["storage_servings"])/SEC_PER_SERVING)
+		Env.physic_status["hunger"]=max(Env.physic_status["hunger"]-passed_seconds*HUNGER_PER_SEC,0.0)
+		Env.physic_status["mana"]+=serving_to_mana
+		Env.physic_status["storage_servings"]-=serving_to_mana
+		if Env.physic_status["hunger"]<=VERY_HUNGER:
+			hunger_event()
+		if Env.Env.physic_status["mana"]==100:
+			type_event()
+	Env.physic_status["time_stamp"]=current_time_stamp
+	pass
 func timer_status_node_init():
 	timer_status_node.wait_time=1.0
 	timer_status_node.start()
 func _on_timer_status_timeout() -> void:#饥饿值的流逝
-	Env.physic_status["hunger"]-=0.01
+	Env.physic_status["hunger"]=max(Env.physic_status["hunger"]-HUNGER_PER_SEC,0.0)
+	if Env.physic_status["hunger"]<=VERY_HUNGER:
+		hunger_event()
+	if Env.physic_status["storage_servings"]>0:
+		Env.physic_status["mana"]+=1
+		Env.physic_status["storage_servings"]-=1
+		if Env.Env.physic_status["mana"]==100:#数值有问题，待会回来修一下
+			type_event()
 	pass 
-func mana():
-	pass
-func product_a_intermediate_file():
-	var intermediate_file:Dictionary={
-	"volume":0,
-	"serving":0,
-	"count":0,
-	"first_bite_time_stamp":0,
-	"type":null,
-	}
-	pass
+func hunger_event():
+	hunger.emit()
+func type_event():
+	type.emit()
+	Env.physic_status["mana"]=0
 func _on_container_files_cook(file_ext: Variant,isdir: bool, file_size: Variant) -> void:
 	var dish_category:String=typeof_dish(str(file_ext))
 	if isdir:
 		dish_category="dir"
 	var serving:int=sizeof_dish(dish_category,int(file_size))
 	Env.physic_status.storage_servings+=serving
-	while Env.physic_status.storage_servings>=TYPE_THRESHOLD:
-		Env.physic_status.storage_servings-=TYPE_THRESHOLD
-		print("我累计食用了50份额的文件。")
-		#print("留空，这里到时候应该发送一个打印信号")
+	if serving<=VOLUME_STOMACH:
+		print("不需要这么多了！")
 func sizeof_dish(dish_category:String,file_size:int)->int:
 	if file_size<=0:
 		return 0
@@ -279,3 +299,8 @@ func typeof_dish(ext:String):
 			"NOT_FOOD"
 		)
 	)
+func physic_status_save():
+	var status_str=JSON.stringify(Env.physic_status,"\t")
+	var status_file=FileAccess.open(PHYSIC_STATUS_PATH,FileAccess.WRITE)
+	status_file.store_string(status_str)
+	status_file.close()

@@ -46,3 +46,6 @@ func _on_popmenu_app_index_pressed(index: int) -> void:#弹出式菜单事件响
 	if index==0:
 		print("eat")
 	pass
+func _on_pe_t_hunger() -> void:
+	popmenu_app_node.get_item_index(0).text="eat......"
+	pass # Replace with function body.
